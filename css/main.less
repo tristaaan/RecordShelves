@@ -1,0 +1,25 @@
+section{
+	margin: 5px;
+	border: 1px solid black;
+	overflow-x: scroll;
+	overflow-y: hidden;
+
+	&.dragover{
+		background-color: #aaa;
+	}
+
+	form{
+		display: none;
+		&.visible{
+			display: block;
+		}
+	}
+
+	article{
+		border: 1px solid #888;
+		display: table-cell;
+		width: 225px;
+		height: 225px;
+	}
+}
+

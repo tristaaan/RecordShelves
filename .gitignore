@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+js/bower_components
+js/vendor.js
+css/main.css
