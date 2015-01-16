@@ -1,25 +1,96 @@
+@color-add: #2B41CC;
+@color-remove: #FF530D;
+
+@article-size: 250px;
+
+@crud-button: {
+	border: none;
+	border-radius: 25%;
+	min-width: 2em;
+	height: 2em;
+};
+
+body{
+	font-family: 'Helvetica' 'Arial' sans-serif; //'Comic Sans MS'; //for extra FUN®
+}
+
 section{
 	margin: 5px;
 	border: 1px solid black;
 	overflow-x: scroll;
+	color: black;
 	overflow-y: hidden;
 
 	&.dragover{
 		background-color: #aaa;
 	}
 
+	h1{
+		display: inline-block;
+		padding: 0;
+		margin: .5em 1em .5em 1.5em;
+	}
+
+	> button{
+		display: inline-block;
+		color: white;
+		background-color: @color-add;
+		margin-top: -5px;
+		vertical-align: text-bottom;
+		@crud-button();
+		&:hover{
+			background-color: darken(@color-add, 10%);
+		}
+	}
+
 	form{
 		display: none;
+		margin-left: 1.5em;
 		&.visible{
 			display: block;
+		}
+		input[type=text]{
+			font-size: .8em;
+		}
+		input[type=submit]{
+			@crud-button();
+			color: white;
+			background-color: @color-add;
+			&:hover{
+				background-color: darken(@color-add, 10%);
+			}
 		}
 	}
 
 	article{
 		border: 1px solid #888;
 		display: table-cell;
-		width: 225px;
-		height: 225px;
+		position: relative;
+		padding: 20px;
+		width: @article-size;
+		height: @article-size;
+		ul{
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			li{
+				margin: 5px 0;
+			}
+		}
+		> button{
+			position: absolute;
+			bottom: 1em;
+			opacity: 0.0;
+			@crud-button();
+			color: white;
+			background-color: @color-remove;
+			&:hover{
+				background-color: darken(@color-remove, 10%);
+			}
+		}
+		&:hover button{
+			opacity: 1.0;
+		}
 	}
 }
 

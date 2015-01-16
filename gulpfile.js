@@ -6,7 +6,6 @@ var jshint = require('gulp-jshint');
 var path   = require('path');
 var source = require('vinyl-source-stream');
 var bowerFiles  = require('main-bower-files');
-var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
@@ -16,8 +15,8 @@ gulp.task('stylesheets', function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest('./css/'))
-    .pipe(reload({ stream:true }));
+    .pipe(gulp.dest('./css'))
+    .pipe(reload({stream:true}));
 });
 
 //Compile JS
@@ -50,11 +49,11 @@ gulp.task('reload', function(){
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: '.'
+      baseDir: './'
     }
   });
 
-  gulp.watch('css/*.less', ['stylesheets', 'reload']);
+  gulp.watch('./css/*.less', ['stylesheets']);
   //gulp.watch('js/**/*.js', ['lint']);
   gulp.watch(['*.html', 'js/**/*.js'], {cwd:'.'}, reload);
 });
