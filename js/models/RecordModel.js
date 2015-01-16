@@ -12,6 +12,5 @@ var app = app || {};
  		asin: '',
  		artist: '',
  		genre: ''
- 	},
-
+ 	}
  });

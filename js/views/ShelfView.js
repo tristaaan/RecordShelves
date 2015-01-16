@@ -5,7 +5,7 @@
  var app = app || {};
 
  app.ShelfView = Backbone.View.extend({
- 	tagName: 'section',
+  tagName: 'section',
   template: _.template($("#shelfTemplate").html()),
 
   events:{
@@ -20,21 +20,22 @@
     this.el.id = this.model.id;
   },
 
- 	render: function(){
+  render: function(){
     var template = this.template(this.model.toJSON());
     this.$el.html(template);
- 		this.model.records.each(this.addRecordView, this);
- 		return this;
- 	},
+    this.model.records.each(this.addRecordAndView, this);
+    return this;
+  },
 
- 	addRecordView: function(record){
- 		var view = new app.RecordView({ 
-      model: record, 
-      collection: this.model
+  addRecordAndView: function(record){
+    this.model.records.add(record); 
+    var view = new app.RecordView({ 
+      model: record
     });
- 		this.$el.append(view.render().el);
- 	},
+    this.$el.append(view.render().el); //no need to rerender the whole view.
+  },
 
+  /* Form functions should probably be their own view */
   toggleForm: function(){
     this.$('form').toggleClass('visible');
   },
@@ -54,16 +55,12 @@
     $(formData.target).serializeArray().forEach(function(element){
       parsedFormData[element.name] = element.value.trim();
     });
-    this.addDataAndView(parsedFormData);
+    this.addRecordAndView(new app.RecordModel(parsedFormData));
     this.hideForm();
+    this.model.save();
   },
 
-  addDataAndView: function(data){
-    var model = new app.RecordModel(data);
-    this.model.records.add(model);
-    this.addRecordView(model); //no need to rerender the whole view.
-  },
-
+  /* Drag and Drop funcitons */
   dragOver: function(e){
     e.preventDefault();
     e.originalEvent.dataTransfer.dropEffect = Constants.dropEffect;
@@ -73,8 +70,9 @@
   recordDropped: function(e){
     e.stopPropagation();
     var droppedData = JSON.parse(e.originalEvent.dataTransfer.getData('record'));
-    this.addDataAndView(droppedData);
-    //console.log('drop', e);
+    var newRecord = new app.RecordModel(droppedData);
+    this.addRecordAndView(newRecord);
+    this.model.save();
     return false;
   }
 
