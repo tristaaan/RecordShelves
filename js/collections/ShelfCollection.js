@@ -1,11 +1,11 @@
 /* ShelfCollection
- * container for shelves
- */
+* container for shelves
+*/
 
 var app = app || {};
 
 app.ShelfCollection = Backbone.Collection.extend({
-	model: app.ShelfModel,
+  model: app.ShelfModel,
 
   localStorage: new Backbone.LocalStorage(Constants.savedData),
 

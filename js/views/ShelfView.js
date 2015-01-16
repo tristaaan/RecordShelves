@@ -1,10 +1,10 @@
 /* ShelfView.js
- * view of a single shelf
- */
+* view of a single shelf
+*/
 
- var app = app || {};
+var app = app || {};
 
- app.ShelfView = Backbone.View.extend({
+app.ShelfView = Backbone.View.extend({
   tagName: 'section',
   template: _.template($("#shelfTemplate").html()),
 

@@ -1,6 +1,6 @@
 /* ShelfModel.js
- * a group of records
- */
+* a group of records
+*/
 var app = app || {};
 
 app.ShelfModel = Backbone.Model.extend({
@@ -28,5 +28,4 @@ app.ShelfModel = Backbone.Model.extend({
   sync: function(method, model, options){
     this.collection.trigger('change', model);
   }
-
 });

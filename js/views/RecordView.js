@@ -1,12 +1,12 @@
 /* RecordView.js
- * view of a single record
- */
+* view of a single record
+*/
 
- var app = app || {};
+var app = app || {};
 
- app.RecordView = Backbone.View.extend({
- 	tagName: 'article',
- 	template: _.template($('#recordTemplate').html()),
+app.RecordView = Backbone.View.extend({
+  tagName: 'article',
+  template: _.template($('#recordTemplate').html()),
 
   attributes: {
     draggable: true
@@ -18,10 +18,10 @@
     'dragend': 'dragEnd'
   },
 
- 	render: function() {
-		var template = this.template(this.model.toJSON());
-		this.$el.html(template);
-		return this;
+  render: function() {
+    var template = this.template(this.model.toJSON());
+    this.$el.html(template);
+    return this;
   },
 
   //remove view from DOM and alter model,
@@ -42,5 +42,4 @@
       this.removeView();
     }
   }
-
- });
+});
