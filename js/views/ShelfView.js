@@ -28,7 +28,7 @@ app.ShelfView = Backbone.View.extend({
   },
 
   addRecordAndView: function(record){
-    this.model.records.add(record); 
+    this.model.records.add(record);
     var view = new app.RecordView({ 
       model: record
     });
@@ -55,9 +55,14 @@ app.ShelfView = Backbone.View.extend({
     $(formData.target).serializeArray().forEach(function(element){
       parsedFormData[element.name] = element.value.trim();
     });
-    this.addRecordAndView(new app.RecordModel(parsedFormData));
     this.hideForm();
+    this.newRecordSaveAndScroll(parsedFormData);
+  },
+
+  newRecordSaveAndScroll: function(record){
+    this.addRecordAndView(new app.RecordModel(record));
     this.model.save();
+    this.$el.scrollLeft(0xffffff); //maximally scroll right.
   },
 
   /* Drag and Drop funcitons */
@@ -70,9 +75,7 @@ app.ShelfView = Backbone.View.extend({
   recordDropped: function(e){
     e.stopPropagation();
     var droppedData = JSON.parse(e.originalEvent.dataTransfer.getData('record'));
-    var newRecord = new app.RecordModel(droppedData);
-    this.addRecordAndView(newRecord);
-    this.model.save();
+    this.newRecordSaveAndScroll(droppedData);
     return false;
   }
 

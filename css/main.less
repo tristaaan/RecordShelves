@@ -2,6 +2,7 @@
 @color-remove: #FF530D;
 
 @article-size: 250px;
+@section-padding-top: 4em;
 
 @crud-button: {
   border: none;
@@ -18,46 +19,65 @@ section{
   margin: 5px;
   border: 1px solid black;
   overflow-x: scroll;
-  color: black;
   overflow-y: hidden;
+  color: black;
+  padding-top: @section-padding-top;
 
   &.dragover{
     background-color: #aaa;
   }
-
-  h1{
-    display: inline-block;
-    padding: 0;
-    margin: .5em 1em .5em 1.5em;
-  }
-
-  > button{
-    display: inline-block;
-    color: white;
-    background-color: @color-add;
-    margin-top: -5px;
-    vertical-align: text-bottom;
-    @crud-button();
-    &:hover{
-      background-color: darken(@color-add, 10%);
+  header{
+    position: absolute;
+    margin-top: -@section-padding-top;
+    h1{
+      display: inline-block;
+      padding: 0;
+      margin: .5em 1em .5em 1.5em;
     }
-  }
 
-  form{
-    display: none;
-    margin-left: 1.5em;
-    &.visible{
-      display: block;
-    }
-    input[type=text]{
-      font-size: .8em;
-    }
-    input[type=submit]{
-      @crud-button();
+    > button{
+      display: inline-block;
       color: white;
       background-color: @color-add;
+      margin-top: -5px;
+      vertical-align: text-bottom;
+      @crud-button();
       &:hover{
         background-color: darken(@color-add, 10%);
+      }
+    }
+
+    form{
+      display: none;
+      background-color: white;
+      border: 1px solid black;
+      padding: 1em;
+      margin-left: 1.5em;
+      position: relative;
+      z-index: 100;
+      &.visible{
+        display: block;
+      }
+      .arrow{
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #000;
+        border-width: 10px;
+        width: 1px;
+        height: 0;
+        top: -20px;
+        left: 118px;
+        position: absolute;
+      }
+      input[type=text]{
+        font-size: .8em;
+      }
+      input[type=submit]{
+        @crud-button();
+        color: white;
+        background-color: @color-add;
+        &:hover{
+          background-color: darken(@color-add, 10%);
+        }
       }
     }
   }
@@ -66,6 +86,7 @@ section{
     border: 1px solid #888;
     display: table-cell;
     position: relative;
+    z-index: 10;
     padding: 20px;
     width: @article-size;
     height: @article-size;
