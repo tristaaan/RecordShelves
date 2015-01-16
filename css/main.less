@@ -1,5 +1,6 @@
 @color-add: #2B41CC;
 @color-remove: #FF530D;
+@color-sort: #d1d1d1;
 
 @article-size: 250px;
 @section-padding-top: 4em;
@@ -45,6 +46,14 @@ section{
       &:hover{
         background-color: darken(@color-add, 10%);
       }
+    }
+
+    select{
+      font-size: 1em;
+      vertical-align: text-bottom;
+      border-radius: 25%;
+      border: none;
+      background-color: @color-sort;
     }
 
     form{

@@ -11,12 +11,14 @@ app.ShelfView = Backbone.View.extend({
   events:{
     'click .addButton': 'toggleForm',
     'submit': 'newRecordFromForm',
+    'change .sort': 'sortShelf',
     'dragover': 'dragOver',
     'drop': 'recordDropped'
   },
 
   initialize: function(){
     this.listenTo(this.model.records, 'change', this.render);
+    this.listenTo(this.model.records, 'sort', this.render);
     this.el.id = this.model.id;
   },
 
@@ -77,6 +79,11 @@ app.ShelfView = Backbone.View.extend({
     var droppedData = JSON.parse(e.originalEvent.dataTransfer.getData('record'));
     this.newRecordSaveAndScroll(droppedData);
     return false;
+  },
+
+  sortShelf: function(e){
+    this.model.records.sortOnce(e.target.value.toLowerCase());
+    this.model.save();
   }
 
 });
