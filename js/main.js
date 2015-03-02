@@ -2,22 +2,25 @@
  * require all the things 
  */
 
-// var library = (function(){
-//   var shelves = new app.ShelfCollection();
+'use strict';
 
-//   $.ajax({
-//     url: '/data/record-shelf.json',
-//     success: function(resp){
-//       shelves.reset(resp.recordshelf);
-//       var shelvesView = new app.ShelvesView({collection: shelves});
-//       $('body').html(shelvesView.render().el);
-//     }
-//   })
+// <!-- Models -->
+var Constants = require('./constants.js')
+var ShelfModel = require('./models/ShelfModel.js');
+var RecordModel = require('./models/RecordModel.js');
 
-// })();
+// <!-- Views -->
+var RecordView = require('./views/RecordView.js');
+var ShelfView = require('./views/ShelfView.js');
+var ShelvesView = require('./views/ShelvesView.js');
 
-var shelves = new app.ShelfCollection();
-var shelvesView = new app.ShelvesView({collection: shelves});
+// <!-- Collections -->
+var ShelfCollection = require('./collections/ShelfCollection.js');
+var RecordCollection = require('./collections/RecordCollection.js');
+
+var shelves = new ShelfCollection();
+var shelvesView = new ShelvesView({collection: shelves});
+
 $('body').html(shelvesView.render().el);
 
 if (location.search.split(Constants.resetParam+'=')[1] === 'true' || window.localStorage.length <= 1){

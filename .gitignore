@@ -2,4 +2,5 @@
 node_modules/
 js/bower_components
 js/vendor.js
+js/compiled.js
 css/main.css

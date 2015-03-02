@@ -1,9 +1,12 @@
 /* RecordModel.js
 * has: title, asin, artist, genre
 */
-var app = app || {};
 
-app.RecordModel = Backbone.Model.extend({
+'use strict';
+
+var Constants = require('../constants.js');
+
+var RecordModel = Backbone.Model.extend({
 
   idAttribute: Constants.primaryRecordKey,
 
@@ -14,3 +17,5 @@ app.RecordModel = Backbone.Model.extend({
     genre: ''
   }
 });
+
+module.exports = RecordModel;

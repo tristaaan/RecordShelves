@@ -2,9 +2,11 @@
 * view of a ShelvesCollection
 */
 
-var app = app || {};
+'use strict';
 
-app.ShelvesView = Backbone.View.extend({
+var ShelfView = require('./ShelfView.js');
+
+var ShelvesView = Backbone.View.extend({
   tagName: 'main',
 
   initialize: function(){
@@ -19,8 +21,10 @@ app.ShelvesView = Backbone.View.extend({
   },
 
   addShelf: function(shelf) {
-    var view = new app.ShelfView({ model: shelf});
+    var view = new ShelfView({ model: shelf});
     this.$el.append(view.render().el);
     shelf.save();
   }
 });
+
+module.exports = ShelvesView;

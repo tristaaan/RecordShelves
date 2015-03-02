@@ -2,10 +2,13 @@
 * container for shelves
 */
 
-var app = app || {};
+'use strict';
 
-app.RecordCollection = Backbone.Collection.extend({
-  model: app.RecordModel,
+var RecordModel = require('../models/RecordModel.js');
+var Constants = require('../constants.js');
+
+var RecordCollection = Backbone.Collection.extend({
+  model: RecordModel,
 
   initialize: function(){
     this.on('change:remove', function(el){
@@ -22,3 +25,5 @@ app.RecordCollection = Backbone.Collection.extend({
   }
 
 });
+
+module.exports = RecordCollection;

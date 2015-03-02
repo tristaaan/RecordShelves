@@ -7,6 +7,7 @@ var path   = require('path');
 var source = require('vinyl-source-stream');
 var bowerFiles  = require('main-bower-files');
 var browserSync = require('browser-sync');
+var browserify = require('browserify');
 var reload = browserSync.reload;
 
 // Compile LESS
@@ -39,8 +40,16 @@ gulp.task('vendor_javascripts', function () {
     .pipe(gulp.dest('./js/'));
 });
 
+// Compile the scripts
+gulp.task('javascripts', ['lint', 'vendor_javascripts'], function () {
+  return browserify('./js/main.js')
+    .bundle()
+    .pipe(source('compiled.js'))
+    .pipe(gulp.dest('./js/'));
+});
+
 // Build
-gulp.task('build', ['vendor_javascripts', 'stylesheets']);
+gulp.task('build', ['javascripts', 'stylesheets']);
 
 gulp.task('reload', function(){
 	browserSync.reload();
@@ -53,9 +62,9 @@ gulp.task('serve', ['build'], function() {
     }
   });
 
-  gulp.watch('./css/*.less', ['stylesheets']);
-  //gulp.watch('js/**/*.js', ['lint']);
-  gulp.watch(['*.html', 'js/**/*.js'], {cwd:'.'}, reload);
+  gulp.watch('./css/*.less', ['stylesheets', 'reload']);
+  gulp.watch('./js/**/*.js', ['javascripts', 'reload']);
+  gulp.watch(['*.html'], {cwd:'.'}, reload);
 });
 
 gulp.task('default', ['build']);

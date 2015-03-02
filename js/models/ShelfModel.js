@@ -1,9 +1,12 @@
 /* ShelfModel.js
 * a group of records
 */
-var app = app || {};
 
-app.ShelfModel = Backbone.Model.extend({
+'use strict';
+
+var RecordCollection = require('../collections/RecordCollection');
+
+var ShelfModel = Backbone.Model.extend({
   
   defaults: {
     id: '',
@@ -21,7 +24,7 @@ app.ShelfModel = Backbone.Model.extend({
 
   parse: function(data){
     this.title = data.title;
-    this.records = new app.RecordCollection(data.records);
+    this.records = new RecordCollection(data.records);
     return data;
   },
 
@@ -29,3 +32,5 @@ app.ShelfModel = Backbone.Model.extend({
     this.collection.trigger('change', model);
   }
 });
+
+module.exports = ShelfModel;

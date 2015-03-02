@@ -2,9 +2,11 @@
 * view of a single record
 */
 
-var app = app || {};
+'use strict';
 
-app.RecordView = Backbone.View.extend({
+var Constants = require('../constants.js');
+
+var RecordView = Backbone.View.extend({
   tagName: 'article',
   template: _.template($('#recordTemplate').html()),
 
@@ -43,3 +45,5 @@ app.RecordView = Backbone.View.extend({
     }
   }
 });
+
+module.exports = RecordView;

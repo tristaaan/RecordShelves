@@ -2,9 +2,12 @@
 * view of a single shelf
 */
 
-var app = app || {};
+'use strict';
 
-app.ShelfView = Backbone.View.extend({
+var RecordModel = require('../models/RecordModel.js');
+var RecordView = require('./RecordView.js');
+
+var ShelfView = Backbone.View.extend({
   tagName: 'section',
   template: _.template($("#shelfTemplate").html()),
 
@@ -31,7 +34,7 @@ app.ShelfView = Backbone.View.extend({
 
   addRecordAndView: function(record){
     this.model.records.add(record);
-    var view = new app.RecordView({ 
+    var view = new RecordView({ 
       model: record
     });
     this.$el.append(view.render().el); //no need to rerender the whole view.
@@ -62,7 +65,7 @@ app.ShelfView = Backbone.View.extend({
   },
 
   newRecordSaveAndScroll: function(record){
-    this.addRecordAndView(new app.RecordModel(record));
+    this.addRecordAndView(new RecordModel(record));
     this.model.save();
     this.$el.scrollLeft(0xffffff); //maximally scroll right.
   },
@@ -87,3 +90,5 @@ app.ShelfView = Backbone.View.extend({
   }
 
 });
+
+module.exports = ShelfView;
